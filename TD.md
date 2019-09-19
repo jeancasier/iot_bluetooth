@@ -58,6 +58,6 @@ Vous avez maintenant un code fonctionnel. Afin de le tester, vous devez maintena
 
 ## Exercice 2 : Afficher du texte sur un écran via Bluetooth
 
-2.1 Connecter et configurer votre écran.
-2.2 Afficher "Hello world" sur votre écran.
-2.3 Afficher le texte reçu par Bluetooth à l'écran.
+1. Connecter et configurer votre écran.
+2. Afficher "Hello world" sur votre écran.
+3. Afficher le texte reçu par Bluetooth à l'écran.

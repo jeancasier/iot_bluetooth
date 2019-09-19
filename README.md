@@ -1,4 +1,4 @@
-# IoT - Bluetooth
+﻿# IoT - Bluetooth
 
 Présentation du Bluetooth sur ESP32 : Cours et TD.
 

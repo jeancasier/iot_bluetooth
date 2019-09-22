@@ -1,13 +1,13 @@
-# TD Bluetooth
+﻿# TD Bluetooth Classique
 
-Ce TD va vous permettre de prendre en main la gestion du Bluetooth sur vos objets connectés.
-Le premier exercice est guidé afin de vous aider à mettre en place votre premier programme utilisant le Bluetooth, tandis que sur le deuxième exercice vous êtes en autonomie.
+Ce TD va vous permettre de prendre en main la gestion du Bluetooth dit classique sur vos objets connectés.
+Le premier exercice est guidé afin de vous aider à mettre en place votre premier programme utilisant le Bluetooth, tandis que sur le deuxième et le troisème exercice vous êtes en autonomie.
 
 ## Exercice 1 : Controller une LED via Bluetooth
 
-L'idée de ce programme est d'allumer la LED lorsque la donnée reçu est '1', et de l'éteindre lorsque l'on reçoit '0'.
+L'idée de ce programme est d'allumer la LED lorsque la donnée reçue est '1', et de l'éteindre lorsque l'on reçoit '0'.
 
-Pour commencer, il nous faut importer la librairie Bluetooth :
+Pour commencer, il nous faut importer la librairie BluetoothSerial :
 
 ``` C
 #include "BluetoothSerial.h"
@@ -19,36 +19,31 @@ Vous pouvez ensuite créer un objet pour le bluetooth :
 BluetoothSerial ESP_BT;
 ```
 
-Dans la fonction setup(), nous avons besoin d'initialiser notre nouvel objet, ainsi que notre LED :
+Dans la fonction setup(), on initialise notre objet, ainsi que la LED :
 
 ``` C
 void setup() {
-	Serial.begin(9600);
 	ESP_BT.begin("Bluetooth LED"); //Changez ce nom afin de reconnaître facilement votre ESP au moment de l'appareillage
-	Serial.println("Bluetooth Device is Ready to Pair");
-
 	pinMode (LED_BUILTIN, OUTPUT);
 }
 ```
 
-Afin de récupérer les données reçues via le Bluetooth, on check à chaque loop si l'on a reçu des données. Si des données sont reçues, on vérifie leur valeur et si elles sont égales à '0' ou '1' alors on éteind / allume la LED.
+Afin de récupérer les données reçues via le Bluetooth, à chaque tour de boucle on vérifie si l'on a reçu ou non des données. Si c'est le cas, on vérifie leurs valeurs et on agit en conséquence.
 
 ``` C
 if (ESP_BT.available()) 
 {
 	incoming = ESP_BT.read();
-	Serial.print("Received:"); 
-	Serial.println(incoming);
 	if (incoming == 49) // 49 : code ASCII pour '1'
 	{
 		digitalWrite(LED_BUILTIN, HIGH);
-		ESP_BT.println("LED turned ON");
+		ESP_BT.println("La LED est allumée"); // Permet d'envoyer des données au client.
 	}
        
 	if (incoming == 48) // 48 : code ASCII pour '0'
 	{
 		digitalWrite(LED_BUILTIN, LOW);
-		ESP_BT.println("LED turned OFF");
+		ESP_BT.println("La LED est éteinte");
 	}
 }
 ```
@@ -58,6 +53,10 @@ Vous avez maintenant un code fonctionnel. Afin de le tester, vous devez maintena
 
 ## Exercice 2 : Afficher du texte sur un écran via Bluetooth
 
-1. Connecter et configurer votre écran.
-2. Afficher "Hello world" sur votre écran.
-3. Afficher le texte reçu par Bluetooth à l'écran.
+1. Connecter et configurer un écran à votre ESP32.
+2. Afficher la phrase "Hello world" sur cet écran.
+3. Afficher les textes reçus par Bluetooth à l'écran.
+
+## Exercice 3 (BONUS) :
+
+1. Permettre à votre ESP32 de gérer plusieurs clients.

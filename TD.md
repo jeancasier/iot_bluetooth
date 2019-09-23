@@ -28,12 +28,12 @@ void setup() {
 }
 ```
 
-Afin de récupérer les données reçues via le Bluetooth, à chaque tour de boucle on vérifie si l'on a reçu ou non des données. Si c'est le cas, on vérifie leurs valeurs et on agit en conséquence.
+Afin de récupérer les données reçues via le Bluetooth, à chaque tour de boucle (fonction loop) on vérifie si l'on a reçu ou non des données. Si c'est le cas, on vérifie leurs valeurs et on agit en conséquence.
 
 ``` C
 if (ESP_BT.available()) 
 {
-	incoming = ESP_BT.read();
+	int incoming = ESP_BT.read();
 	if (incoming == 49) // 49 : code ASCII pour '1'
 	{
 		digitalWrite(LED_BUILTIN, HIGH);
